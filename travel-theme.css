@@ -1,0 +1,172 @@
+/* Warm editorial travel-journal theme inspired by the reference image. */
+:root {
+  --bg: #eee7d4;
+  --paper: #f8f4e8;
+  --card: #fbf8ee;
+  --ink: #342d26;
+  --muted: #8a806f;
+  --line: #9c9078;
+  --gold: #d7c7a6;
+  --gold-deep: #806344;
+  --rose: #806344;
+  --blue: #e8e1cf;
+  --green: #e8e6d8;
+  --pink: #f1e7dc;
+  --shadow: 0 12px 30px rgba(67, 55, 39, .09);
+  --radius: 28px;
+}
+
+body {
+  padding: 22px 18px 110px;
+  background: #eee7d4;
+  color: var(--ink);
+  font-family: "Noto Serif TC", "Songti TC", "Yu Mincho", "Noto Sans TC", serif;
+}
+
+.app-shell { max-width: 760px; gap: 20px; }
+.topbar {
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+  padding: 14px 4px 20px;
+}
+.brand-badge { display: none; }
+.meta-label {
+  font-family: Georgia, "Times New Roman", serif;
+  font-style: italic;
+  letter-spacing: .16em;
+  color: #9b896c;
+  font-size: 13px;
+  text-transform: none;
+}
+.topbar h1 {
+  font-family: Georgia, "Noto Serif TC", serif;
+  font-weight: 500;
+  letter-spacing: .025em;
+}
+.countdown-btn {
+  width: 58px;
+  height: 58px;
+  min-width: 58px;
+  border: 0;
+  border-radius: 50%;
+  box-shadow: var(--shadow);
+  background: var(--paper);
+}
+.countdown-btn span { font-size: 9px; color: var(--muted); }
+.countdown-btn strong { font-size: 16px; }
+
+.tabbar { gap: 9px; }
+.tab {
+  border: 1px solid rgba(126, 108, 80, .25);
+  border-radius: 999px;
+  box-shadow: none;
+  background: rgba(251,248,238,.7);
+  color: #756a5b;
+  padding: 9px 15px;
+}
+.tab.active { color: var(--paper); background: var(--ink); }
+
+.card {
+  background: var(--paper);
+  border: 1px solid rgba(137, 121, 93, .12);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: clamp(18px, 4vw, 30px);
+}
+.card.accent, .card.green-card, .card.pink-card, .card.yellow-card {
+  background: var(--paper);
+}
+.card h2, .card h3 { font-weight: 500; letter-spacing: .04em; }
+.section-head { align-items: center; }
+.small-btn {
+  border: 1px solid rgba(126,108,80,.26);
+  border-radius: 999px;
+  box-shadow: none;
+  background: #f7f2e5;
+  padding: 9px 14px;
+}
+
+#overview .card:first-child {
+  background: #f5efdf;
+  padding: 20px;
+}
+#overview .card:first-child .section-head h2 { font-size: 1rem; }
+#overview .card.accent {
+  background: linear-gradient(135deg, #f8f3e5, #eee5d0);
+}
+#overview .card.accent h2 {
+  font-family: Georgia, "Noto Serif TC", serif;
+  font-size: clamp(1.5rem, 5vw, 2.2rem);
+  line-height: 1.35;
+}
+#overview .card.accent p { color: var(--muted); }
+.preview-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.preview {
+  border: 1px solid rgba(126,108,80,.2);
+  border-radius: 20px;
+  box-shadow: none;
+  background: rgba(255,255,255,.52);
+  padding: 16px;
+  color: var(--ink);
+}
+.preview-ico {
+  border: 0;
+  border-radius: 50%;
+  background: #e9dfc9;
+}
+
+.weather-week-toolbar {
+  border: 1px dashed #aa9d82;
+  background: rgba(255,255,255,.35);
+}
+.weather-day-card {
+  border: 1px solid rgba(126,108,80,.16);
+  border-radius: 20px;
+  box-shadow: 0 6px 18px rgba(67,55,39,.06);
+  background: #fbf8ee;
+}
+.weather-day-date { font-family: Georgia, serif; letter-spacing: .05em; }
+
+.soft-card, .flight-card, .safety-box, .expense-row, .ghibli-card {
+  border: 1px solid rgba(126,108,80,.18);
+  border-radius: 20px;
+  box-shadow: 0 6px 18px rgba(67,55,39,.06);
+  background: rgba(255,255,255,.48);
+}
+.day-btn { border: 1px solid rgba(126,108,80,.26); box-shadow: none; }
+.day-btn.active { color: var(--paper); background: var(--ink); }
+.time-tag, .time-pink, .time-blue { color: var(--gold-deep); }
+.maplink { border: 1px solid rgba(126,108,80,.18); border-radius: 999px; background: #eee7d4; color: var(--ink); }
+.input { border: 1px solid rgba(126,108,80,.3); border-radius: 14px; background: rgba(255,255,255,.65); }
+
+.bottom-nav {
+  justify-content: center;
+  gap: 4px;
+  padding: 8px 8px calc(8px + env(safe-area-inset-bottom, 0px));
+  background: rgba(248,244,232,.88);
+  backdrop-filter: blur(14px);
+  border-top: 1px solid rgba(126,108,80,.18);
+}
+.bottom-tab {
+  max-width: 90px;
+  font-family: "Noto Sans TC", sans-serif;
+  color: #877c6d;
+}
+.bottom-tab.active { background: #e7deca; color: var(--ink); }
+
+@media (max-width: 680px) {
+  body { padding: 14px 12px 100px; }
+  .app-shell { gap: 12px; }
+  .topbar { padding: 12px 4px 16px; }
+  .topbar h1 { font-size: 1.8rem; }
+  .tabbar { display: flex; overflow-x: auto; flex-wrap: nowrap; padding: 2px 2px 8px; }
+  .tab { flex: 0 0 auto; font-size: 12px; padding: 8px 12px; }
+  .preview-grid { grid-template-columns: 1fr; }
+  .preview { padding: 13px; }
+  .bottom-nav { display: flex; overflow-x: auto; justify-content: flex-start; }
+  .bottom-tab { flex: 0 0 56px; font-size: 9px; }
+  .weather-week-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
+  .weather-day-card { min-height: 150px; padding: 11px 9px; }
+}
