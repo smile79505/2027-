@@ -14,15 +14,9 @@
     <header class="topbar">
       <div class="brand-group">
         <span class="brand-badge">📖</span>
-        <div>
-          <div class="meta-label">Buon Viaggio · 名古屋之旅</div>
-          <h1>名古屋 遊記</h1>
-        </div>
+        <div><div class="meta-label">Buon Viaggio · 名古屋之旅</div><h1>名古屋 遊記</h1></div>
       </div>
-      <button id="countdownBtn" class="countdown-btn" type="button" aria-label="距離出發倒數">
-        <span>距離出發</span>
-        <strong id="countdownText">7 天</strong>
-      </button>
+      <button id="countdownBtn" class="countdown-btn" type="button"><span>距離出發</span><strong id="countdownText">7 天</strong></button>
     </header>
 
     <nav class="tabbar" aria-label="主導航">
@@ -43,8 +37,8 @@
           <p>名古屋・吉卜力公園・犬山・白川鄉・飛驒高山</p>
         </div>
 
-        <section class="journey-calendar" aria-label="旅程日期選擇">
-          <div class="journey-days">
+        <section class="journey-calendar" aria-label="選擇每日行程">
+          <div class="journey-days" aria-label="旅程日期">
             <button class="journey-day active" data-goto-day="1" type="button"><span>WED <sup>D1</sup></span><strong>20</strong><small>01月</small></button>
             <button class="journey-day" data-goto-day="2" type="button"><span>THU <sup>D2</sup></span><strong>21</strong><small>01月</small></button>
             <button class="journey-day" data-goto-day="3" type="button"><span>FRI <sup>D3</sup></span><strong>22</strong><small>01月</small></button>
@@ -53,151 +47,67 @@
             <button class="journey-day" data-goto-day="6" type="button"><span>MON <sup>D6</sup></span><strong>25</strong><small>01月</small></button>
             <button class="journey-day" data-goto-day="7" type="button"><span>TUE <sup>D7</sup></span><strong>26</strong><small>01月</small></button>
           </div>
-          <div class="journey-progress" aria-label="七日旅程">
-            <span class="progress-arrow" aria-hidden="true">‹</span>
-            <div class="progress-track"><i></i></div>
-            <span class="progress-arrow" aria-hidden="true">›</span>
-          </div>
+          <div class="journey-progress" aria-hidden="true"><span class="progress-arrow">‹</span><div class="progress-track"><i></i></div><span class="progress-arrow">›</span></div>
           <div class="journey-progress-caption">Day 1 / 7</div>
         </section>
 
         <article class="today-card">
           <div class="route-doodle" aria-hidden="true"><span class="route-pin">●</span><span class="route-dash"></span><span class="route-plane">✈</span></div>
-          <div class="today-copy">
-            <span class="today-label">OUR JOURNEY</span>
-            <h2>Day 1　1月20日</h2>
-            <p>名古屋 · 抵達與熱田參拜</p>
-          </div>
+          <div class="today-copy"><span class="today-label">OUR JOURNEY</span><h2>Day 1　1月20日</h2><p>抵達名古屋、熱田神宮參拜</p></div>
         </article>
 
-        <button class="flight-link" data-tab="flight" type="button">
-          <span aria-hidden="true">✈</span><strong>出國資訊・航班時刻表</strong><span class="flight-link-arrow">›</span>
-        </button>
+        <button class="flight-link" data-tab="flight" type="button"><span aria-hidden="true">✈</span><strong>出國資訊・航班時刻表</strong><span class="flight-link-arrow">›</span></button>
 
         <section class="home-itinerary card">
           <div class="section-head">
             <div class="home-section-title"><span aria-hidden="true">▦</span><h2>今日行程</h2></div>
             <button class="text-link" data-goto-day="1" type="button">查看全部　›</button>
           </div>
-          <button class="home-stop" data-goto-day="1" type="button"><time>06:30</time><span><strong>抵達中部國際機場</strong><small>名古屋 · T2</small></span><b>›</b></button>
-          <button class="home-stop" data-goto-day="1" type="button"><time>10:00</time><span><strong>熱田神宮</strong><small>古木參天的神宮散步</small></span><b>›</b></button>
-          <button class="home-stop" data-goto-day="1" type="button"><time>12:30</time><span><strong>熱田蓬萊軒</strong><small>鰻魚飯三吃 · 名古屋美食</small></span><b>›</b></button>
-          <button class="home-stop" data-goto-day="1" type="button"><time>16:00</time><span><strong>Oasis 21 與名古屋電視塔</strong><small>榮商圈夜景</small></span><b>›</b></button>
-        </section>
-
-        <section class="home-highlights">
-          <div class="section-head">
-            <div class="home-section-title"><span aria-hidden="true">✧</span><h2>旅程章節</h2></div>
-            <button class="text-link" data-goto-day="1" type="button">全部行程　›</button>
-          </div>
-          <div class="preview-grid">
-            <button class="preview" data-goto-day="1" type="button"><span class="preview-ico">⛩️</span><span><b>DAY 1–2</b><br><small>名古屋市區漫遊</small></span></button>
-            <button class="preview" data-goto-day="3" type="button"><span class="preview-ico">🌿</span><span><b>DAY 3–4</b><br><small>吉卜力公園深度遊</small></span></button>
-            <button class="preview" data-goto-day="5" type="button"><span class="preview-ico">🏯</span><span><b>DAY 5</b><br><small>犬山城與城下町</small></span></button>
-            <button class="preview" data-goto-day="6" type="button"><span class="preview-ico">❄️</span><span><b>DAY 6–7</b><br><small>白川鄉・飛驒高山</small></span></button>
-          </div>
+          <button class="home-stop" data-goto-day="1" type="button"><time>06:30</time><span><strong>抵達中部國際機場 (T2)</strong><small>搭乘樂桃 MM860 抵達，轉乘名鐵特急前往名古屋。</small></span><b>›</b></button>
+          <button class="home-stop" data-goto-day="1" type="button"><time>10:00</time><span><strong>熱田神宮</strong><small>日本三大神宮之一，古木參天、氣氛幽靜。</small></span><b>›</b></button>
+          <button class="home-stop" data-goto-day="1" type="button"><time>12:30</time><span><strong>熱田蓬萊軒（鰻魚飯三吃）</strong><small>名古屋代表美食。</small></span><b>›</b></button>
+          <button class="home-stop" data-goto-day="1" type="button"><time>16:00</time><span><strong>Oasis 21 與名古屋電視塔</strong><small>欣賞榮商圈夜景。</small></span><b>›</b></button>
         </section>
 
         <section class="card home-weather">
-          <div class="section-head">
-            <div class="home-section-title"><span aria-hidden="true">☼</span><h2>一週天氣</h2></div>
-            <button id="refreshWeather" class="small-btn" type="button">🔄 更新</button>
-          </div>
+          <div class="section-head"><div class="home-section-title"><span aria-hidden="true">☼</span><h2>一週天氣</h2></div><button id="refreshWeather" class="small-btn" type="button">🔄 更新</button></div>
           <div id="weatherBox" class="weather-grid"></div>
         </section>
       </section>
 
       <section id="itinerary" class="page">
-        <div class="card">
-          <div id="dayButtons" class="day-row"></div>
-          <div id="itineraryBox"></div>
-        </div>
+        <div class="card"><div id="dayButtons" class="day-row"></div><div id="itineraryBox"></div></div>
       </section>
 
-      <section id="ghibli" class="page">
-        <div class="card">
-          <h2>🌿 吉卜力公園 路線圖</h2>
-          <div id="ghibliBox"></div>
-        </div>
-      </section>
+      <section id="ghibli" class="page"><div class="card"><h2>🌿 吉卜力公園 路線圖</h2><div id="ghibliBox"></div></div></section>
 
       <section id="flight" class="page">
         <div class="card">
-          <div class="section-head">
-            <div><h2>🍑 航班</h2><small class="muted">台北 TPE ⇄ 中部國際機場 NGO</small></div>
-            <span class="chip">以訂位確認單為準</span>
-          </div>
-          <div class="flight-card">
-            <div class="row"><span class="chip">去程 MM860</span><span class="muted">2027/01/20 (三)</span></div>
-            <div class="flight-row">
-              <div class="airport"><div class="code">TPE</div><div class="muted">桃園 T1</div><div class="time-pink">02:25</div></div>
-              <div class="flight-mid"><div class="muted">3 小時 05 分</div><div class="flight-line"></div><span class="chip">直飛</span></div>
-              <div class="airport"><div class="code">NGO</div><div class="muted">中部 T2</div><div class="time-pink">06:30</div></div>
-            </div>
-          </div>
-          <div class="flight-card">
-            <div class="row"><span class="chip sky">回程 MM861</span><span class="muted">2027/01/26 (二)</span></div>
-            <div class="flight-row">
-              <div class="airport"><div class="code">NGO</div><div class="muted">中部 T2</div><div class="time-blue">22:45</div></div>
-              <div class="flight-mid"><div class="muted">3 小時 30 分</div><div class="flight-line"></div><span class="chip">直飛</span></div>
-              <div class="airport"><div class="code">TPE</div><div class="muted">桃園 T1</div><div class="time-blue">01:15 (+1)</div></div>
-            </div>
-          </div>
+          <div class="section-head"><div><h2>🍑 航班</h2><small class="muted">台北 TPE ⇄ 中部國際機場 NGO</small></div><span class="chip">以訂位確認單為準</span></div>
+          <div class="flight-card"><div class="row"><span class="chip">去程 MM860</span><span class="muted">2027/01/20 (三)</span></div><div class="flight-row"><div class="airport"><div class="code">TPE</div><div class="muted">桃園 T1</div><div class="time-pink">02:25</div></div><div class="flight-mid"><div class="muted">3 小時 05 分</div><div class="flight-line"></div><span class="chip">直飛</span></div><div class="airport"><div class="code">NGO</div><div class="muted">中部 T2</div><div class="time-pink">06:30</div></div></div></div>
+          <div class="flight-card"><div class="row"><span class="chip sky">回程 MM861</span><span class="muted">2027/01/26 (二)</span></div><div class="flight-row"><div class="airport"><div class="code">NGO</div><div class="muted">中部 T2</div><div class="time-blue">22:45</div></div><div class="flight-mid"><div class="muted">3 小時 30 分</div><div class="flight-line"></div><span class="chip">直飛</span></div><div class="airport"><div class="code">TPE</div><div class="muted">桃園 T1</div><div class="time-blue">01:15 (+1)</div></div></div></div>
         </div>
-        <div class="card" style="margin-top:16px">
-          <div class="section-head"><div><h2>🏨 飯店住宿</h2><small class="muted">可自訂名稱與地址</small></div><button id="hotelEditBtn" class="small-btn" type="button">編輯飯店</button></div>
-          <div id="hotelBox"></div>
-        </div>
+        <div class="card" style="margin-top:16px"><div class="section-head"><div><h2>🏨 飯店住宿</h2><small class="muted">可自訂名稱與地址</small></div><button id="hotelEditBtn" class="small-btn" type="button">編輯飯店</button></div><div id="hotelBox"></div></div>
       </section>
 
       <section id="checklist" class="page">
-        <div class="card checklist-top">
-          <div class="section-head"><h2>🎒 行前清單</h2><span id="checkProgressText" class="muted">0 / 0</span></div>
-          <div class="progress"><i id="checkProgressBar"></i></div>
-          <div class="tool-row"><select id="checkCategory" class="input" style="max-width:180px;"></select><input id="newChecklistItem" class="input grow" placeholder="新增項目 (如: 暖暖包)"><button id="addChecklistBtn" class="small-btn" type="button">加入</button></div>
-        </div>
+        <div class="card checklist-top"><div class="section-head"><h2>🎒 行前清單</h2><span id="checkProgressText" class="muted">0 / 0</span></div><div class="progress"><i id="checkProgressBar"></i></div><div class="tool-row"><select id="checkCategory" class="input" style="max-width:180px;"></select><input id="newChecklistItem" class="input grow" placeholder="新增項目 (如: 暖暖包)"><button id="addChecklistBtn" class="small-btn" type="button">加入</button></div></div>
         <div id="checklistBox" style="margin-top:12px;"></div>
       </section>
 
       <section id="safety" class="page">
         <div class="card pink-card">
-          <h2>🛟 愛知縣、名古屋安全求助</h2>
-          <small class="muted">愛知縣屬台北駐大阪經濟文化辦事處轄區</small>
-          <div class="safety-grid">
-            <div class="safety-box"><div class="big-number danger">110</div><div>警察(報案)</div></div>
-            <div class="safety-box"><div class="big-number orange">119</div><div>火災、救護車</div></div>
-          </div>
-          <div class="soft-card">
-            <div class="section-head"><h3>台北駐大阪經濟文化辦事處</h3><span>🏢</span></div>
-            <div class="danger-box"><div class="tiny">24 小時急難救助專線(限危急狀況)</div><div class="row between"><b>+81-80-3112-6161</b><button class="small-btn" data-copy="+81-80-3112-6161" type="button">複製</button></div></div>
-            <div class="danger-call"><b>外交部旅外國人急難救助專線</b><div class="row between"><span>+886-800-085-095</span><button class="small-btn" data-copy="+886-800-085-095" type="button">複製</button></div></div>
-          </div>
-          <div class="stack" style="margin-top:18px">
-            <h3>💬 緊急日語語音卡</h3>
-            <button class="phrase" data-speak="助けてください" type="button"><span><b>助けてください</b><br><small>請幫幫我</small></span><span>🔊</span></button>
-            <button class="phrase" data-speak="警察を呼んでください" type="button"><span><b>警察を呼んでください</b><br><small>請幫我叫警察</small></span><span>🔊</span></button>
-            <button class="phrase" data-speak="救急車を呼んでください" type="button"><span><b>救急車を呼んでください</b><br><small>請叫救護車</small></span><span>🔊</span></button>
-          </div>
+          <h2>🛟 愛知縣、名古屋安全求助</h2><small class="muted">愛知縣屬台北駐大阪經濟文化辦事處轄區</small>
+          <div class="safety-grid"><div class="safety-box"><div class="big-number danger">110</div><div>警察(報案)</div></div><div class="safety-box"><div class="big-number orange">119</div><div>火災、救護車</div></div></div>
+          <div class="soft-card"><div class="section-head"><h3>台北駐大阪經濟文化辦事處</h3><span>🏢</span></div><div class="danger-box"><div class="tiny">24 小時急難救助專線(限危急狀況)</div><div class="row between"><b>+81-80-3112-6161</b><button class="small-btn" data-copy="+81-80-3112-6161" type="button">複製</button></div></div><div class="danger-call"><b>外交部旅外國人急難救助專線</b><div class="row between"><span>+886-800-085-095</span><button class="small-btn" data-copy="+886-800-085-095" type="button">複製</button></div></div></div>
+          <div class="stack" style="margin-top:18px"><h3>💬 緊急日語語音卡</h3><button class="phrase" data-speak="助けてください" type="button"><span><b>助けてください</b><br><small>請幫幫我</small></span><span>🔊</span></button><button class="phrase" data-speak="警察を呼んでください" type="button"><span><b>警察を呼んでください</b><br><small>請幫我叫警察</small></span><span>🔊</span></button><button class="phrase" data-speak="救急車を呼んでください" type="button"><span><b>救急車を呼んでください</b><br><small>請叫救護車</small></span><span>🔊</span></button></div>
         </div>
       </section>
 
       <section id="expense" class="page">
-        <div class="card green-card">
-          <div class="row between"><div><div class="tiny muted"><b>總支出</b></div><div class="big-number" id="totalJpy">JPY 0</div><div class="muted strong" id="totalTwd">≈ TWD 0</div></div><div class="rate-box"><label for="rateInput" class="tiny muted">匯率 (1 JPY = ? TWD)</label><input id="rateInput" class="input" type="number" step="0.001" min="0" style="text-align:center"></div></div>
-        </div>
+        <div class="card green-card"><div class="row between"><div><div class="tiny muted"><b>總支出</b></div><div class="big-number" id="totalJpy">JPY 0</div><div class="muted strong" id="totalTwd">≈ TWD 0</div></div><div class="rate-box"><label for="rateInput" class="tiny muted">匯率 (1 JPY = ? TWD)</label><input id="rateInput" class="input" type="number" step="0.001" min="0" style="text-align:center"></div></div></div>
         <div class="card" style="margin-top:16px"><h3>👥 成員</h3><div id="memberBox" class="row" style="margin-top:10px"></div><div class="tool-row" style="margin-top:10px"><input id="newMemberInput" class="input grow" placeholder="新成員名字"><button id="addMemberBtn" class="small-btn" type="button">新增</button></div></div>
-        <div class="card" style="margin-top:16px">
-          <h3>✍️ 新增消費</h3>
-          <div class="grid2">
-            <div><label class="tiny muted" for="expenseTitle">項目</label><input id="expenseTitle" class="input" placeholder="蓬萊軒鰻魚飯"></div>
-            <div><label class="tiny muted" for="expenseAmount">金額 (JPY)</label><input id="expenseAmount" class="input" type="number" placeholder="4800"></div>
-            <div><label class="tiny muted" for="expensePayer">先付錢的人</label><select id="expensePayer" class="input"></select></div>
-            <div><label class="tiny muted" for="expenseMode">分帳方式</label><select id="expenseMode" class="input"><option value="equal">均分給勾選的人</option><option value="custom">自訂每人金額</option></select></div>
-          </div>
-          <div id="equalBox" style="margin-top:12px"><div class="tiny muted" style="margin-bottom:6px">誰要分攤</div><div class="row" id="expenseParticipants"></div></div>
-          <div id="customBox" hidden style="margin-top:12px"><div class="tiny muted" style="margin-bottom:6px">每人負擔金額 (JPY)</div><div class="grid2" id="expenseCustom"></div></div>
-          <button id="addExpenseBtn" class="small-btn" type="button" style="width:100%; margin-top:12px">記入帳本</button>
-        </div>
+        <div class="card" style="margin-top:16px"><h3>✍️ 新增消費</h3><div class="grid2"><div><label class="tiny muted" for="expenseTitle">項目</label><input id="expenseTitle" class="input" placeholder="蓬萊軒鰻魚飯"></div><div><label class="tiny muted" for="expenseAmount">金額 (JPY)</label><input id="expenseAmount" class="input" type="number" placeholder="4800"></div><div><label class="tiny muted" for="expensePayer">先付錢的人</label><select id="expensePayer" class="input"></select></div><div><label class="tiny muted" for="expenseMode">分帳方式</label><select id="expenseMode" class="input"><option value="equal">均分給勾選的人</option><option value="custom">自訂每人金額</option></select></div></div><div id="equalBox" style="margin-top:12px"><div class="tiny muted" style="margin-bottom:6px">誰要分攤</div><div class="row" id="expenseParticipants"></div></div><div id="customBox" hidden style="margin-top:12px"><div class="tiny muted" style="margin-bottom:6px">每人負擔金額 (JPY)</div><div class="grid2" id="expenseCustom"></div></div><button id="addExpenseBtn" class="small-btn" type="button" style="width:100%;margin-top:12px">記入帳本</button></div>
         <div class="card" style="margin-top:16px"><h3>🧾 消費明細</h3><div id="expenseList" style="margin-top:12px"></div></div>
         <div class="card yellow-card" style="margin-top:16px"><h3>🤝 誰該給誰</h3><div id="settlementBox" style="margin-top:10px"></div></div>
       </section>
@@ -211,7 +121,6 @@
     <button class="bottom-tab" data-tab="expense" type="button">▤<span>記帳</span></button>
     <button class="bottom-tab" data-tab="checklist" type="button">◇<span>清單</span></button>
   </nav>
-
   <div id="toast" hidden></div>
   <script src="./app.js"></script>
   <script src="./weather-week.js"></script>
