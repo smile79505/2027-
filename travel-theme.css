@@ -198,6 +198,10 @@
 .home-weather { margin-top: 0; }
 .home-weather .weather-grid { display: block; }
 
+/* Keep the bottom app navigation and remove the duplicate top menu. */
+.tabbar { display: none !important; }
+.bottom-nav { display: flex !important; }
+
 @media (max-width: 680px) {
   .journey-intro { padding-top: 0; }
   .journey-intro h2 { font-size: clamp(2rem, 8vw, 2.7rem); }
