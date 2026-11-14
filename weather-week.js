@@ -96,7 +96,7 @@
     info.setAttribute('aria-live', 'polite');
     const grid = create('div', 'weather-week-grid');
     grid.id = 'weatherWeekCards';
-    const note = create('p', 'weather-week-note', '預報會在每日首次開啟頁面時更新；頁面保持開啟時每小時檢查一次。天氣預報僅涵蓋近期，無法提前預測 2027 年 1 月的天氣。');
+    const note = create('p', 'weather-week-note', '預報會在每日首次開啟頁面時更新；頁面保持開啟時每小時檢查一次。預報僅涵蓋近期，無法提前預測 2027 年 1 月的天氣。');
     const source = document.createElement('a');
     source.className = 'weather-week-source';
     source.href = 'https://open-meteo.com/';
@@ -187,12 +187,11 @@
       if (cached) {
         status(`${LOCATIONS[city].name}・目前顯示上次快取；更新失敗，請檢查網路後重試。`, true);
       } else {
-        status('無法載入天氣預報，請檢查網路連線後按「刷新」重試。', true);
+        status('無法載入天氣預報，請檢查網路連線後按「更新」重試。', true);
       }
     }
   }
 
-  // Replace the legacy sample-weather button behavior with a real API refresh.
   refreshButton.addEventListener('click', (event) => {
     event.preventDefault();
     event.stopImmediatePropagation();
@@ -202,8 +201,6 @@
   buildUI();
   loadForecast(false);
 
-  // Static hosting cannot run jobs while the page is closed. Check hourly and
-  // whenever the page returns to the foreground; the cache enforces at most daily updates.
   setInterval(() => {
     if (Date.now() - lastAutoCheck >= CHECK_INTERVAL_MS) {
       lastAutoCheck = Date.now();
@@ -217,4 +214,86 @@
       loadForecast(false);
     }
   });
+
+  // Keep the decorative home date strip, current-day summary, and editable itinerary
+  // driven by the same persisted itinerary dates instead of separate hard-coded dates.
+  function syncItineraryDateRibbon() {
+    if (typeof state === 'undefined' || typeof currentDay === 'undefined') return;
+    const itinerary = state.itin || {};
+    const dayEntries = Object.entries(itinerary);
+    const ribbon = document.querySelector('.journey-days');
+    const caption = document.querySelector('.journey-progress-caption');
+    const progress = document.querySelector('.progress-track i');
+    const todayTitle = document.querySelector('.today-copy h2');
+    const todayDescription = document.querySelector('.today-copy p');
+    const homeSchedule = document.querySelector('.home-itinerary');
+    if (!ribbon || !dayEntries.length) return;
+
+    const weekdays = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+    ribbon.replaceChildren();
+    dayEntries.forEach(([key, day], index) => {
+      const match = String(day.date || '').match(/(\d{4})\/(\d{1,2})\/(\d{1,2})/);
+      const fallbackDate = new Date(2027, 0, 20 + index);
+      const date = match ? new Date(Number(match[1]), Number(match[2]) - 1, Number(match[3]), 12) : fallbackDate;
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = `journey-day${Number(key) === Number(currentDay) ? ' active' : ''}`;
+      button.dataset.gotoDay = key;
+      const weekday = document.createElement('span');
+      weekday.append(document.createTextNode(weekdays[date.getDay()]));
+      const dayMark = document.createElement('sup');
+      dayMark.textContent = `D${index + 1}`;
+      weekday.appendChild(dayMark);
+      const number = document.createElement('strong');
+      number.textContent = String(date.getDate());
+      const month = document.createElement('small');
+      month.textContent = `${String(date.getMonth() + 1).padStart(2, '0')}月`;
+      button.append(weekday, number, month);
+      ribbon.appendChild(button);
+    });
+
+    const selectedIndex = Math.max(0, dayEntries.findIndex(([key]) => Number(key) === Number(currentDay)));
+    const [selectedKey, selectedDay] = dayEntries[selectedIndex];
+    if (caption) caption.textContent = `Day ${selectedIndex + 1} / ${dayEntries.length}`;
+    if (progress) progress.style.width = `${((selectedIndex + 1) / dayEntries.length) * 100}%`;
+    if (todayTitle) {
+      const match = String(selectedDay.date || '').match(/\d{4}\/(\d{1,2})\/(\d{1,2})/);
+      todayTitle.textContent = match ? `Day ${selectedIndex + 1}　${Number(match[1])}月${Number(match[2])}日` : `Day ${selectedIndex + 1}`;
+    }
+    if (todayDescription) todayDescription.textContent = selectedDay.title || '';
+
+    if (homeSchedule) {
+      const sectionHead = homeSchedule.querySelector('.section-head');
+      homeSchedule.replaceChildren();
+      if (sectionHead) homeSchedule.appendChild(sectionHead);
+      const title = homeSchedule.querySelector('.home-section-title h2');
+      if (title) title.textContent = '今日行程';
+      const viewAll = homeSchedule.querySelector('.text-link');
+      if (viewAll) viewAll.dataset.gotoDay = selectedKey;
+      (selectedDay.items || []).forEach((item) => {
+        const row = document.createElement('button');
+        row.type = 'button';
+        row.className = 'home-stop';
+        row.dataset.gotoDay = selectedKey;
+        const time = document.createElement('time');
+        time.textContent = item.time || '—';
+        const details = document.createElement('span');
+        const name = document.createElement('strong');
+        name.textContent = item.title || '未命名行程';
+        const note = document.createElement('small');
+        note.textContent = item.desc || item.q || '';
+        details.append(name, note);
+        const arrow = document.createElement('b');
+        arrow.textContent = '›';
+        row.append(time, details, arrow);
+        homeSchedule.appendChild(row);
+      });
+    }
+
+    const activeButton = ribbon.querySelector('.journey-day.active');
+    activeButton?.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' });
+  }
+
+  document.addEventListener('click', () => window.setTimeout(syncItineraryDateRibbon, 0));
+  syncItineraryDateRibbon();
 })();
