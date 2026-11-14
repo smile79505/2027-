@@ -1,145 +1,170 @@
-/* Itinerary UX: keep the home page as a concise preview and the itinerary page as the single source of detailed schedules. */
-.home-itinerary {
-  display: none;
+/* Journal-style refinement: warm paper, quieter modules, softer rhythm. */
+body {
+  background:
+    radial-gradient(circle at top, rgba(255,255,255,.32), transparent 38%),
+    linear-gradient(180deg, #efe7d8 0%, #e6dfd1 100%);
+  letter-spacing: .01em;
+}
+
+.app-shell {
+  max-width: 780px;
+}
+
+.topbar {
+  padding: 10px 4px 18px;
+  border-bottom: 1px solid rgba(126,108,80,.2);
+}
+
+.meta-label {
+  font-size: 11px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+}
+
+.topbar h1 {
+  margin-top: 6px;
+  font-size: clamp(2rem, 5vw, 2.8rem);
+  line-height: 1.1;
+  letter-spacing: .04em;
+}
+
+.countdown-btn {
+  border-radius: 18px;
+  box-shadow: 0 8px 20px rgba(67,55,39,.06);
+  background: rgba(250,247,241,.92);
+}
+
+.card {
+  border: 1px solid rgba(126,108,80,.14);
+  border-radius: 24px;
+  box-shadow: 0 14px 28px rgba(67,55,39,.05);
+}
+
+.section-head {
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.card h2,
+.card h3 {
+  letter-spacing: .02em;
+}
+
+.soft-card,
+.flight-card,
+.safety-box,
+.expense-row,
+.ghibli-card,
+#itineraryBox > .soft-card:first-child,
+#itineraryBox > .soft-card:last-child {
+  border: 1px solid rgba(126,108,80,.12);
+  box-shadow: 0 10px 24px rgba(67,55,39,.04);
 }
 
 #itinerary .card {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
+  gap: 12px;
 }
 
 #itinerary .day-row {
-  display: flex;
-  gap: 9px;
-  overflow-x: auto;
-  margin: 0 -4px;
-  padding: 4px 4px 12px;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: thin;
-  scrollbar-color: #b8a98e transparent;
-  -webkit-overflow-scrolling: touch;
+  gap: 8px;
+  padding-bottom: 8px;
 }
 
 #itinerary .day-btn {
-  flex: 0 0 auto;
-  min-height: 42px;
-  padding: 9px 15px;
-  border: 1px solid rgba(126,108,80,.2);
-  border-radius: 999px;
-  background: #f9f6ec;
-  color: #756a5b;
-  box-shadow: none;
-  scroll-snap-align: center;
-  transition: background-color .18s ease, color .18s ease, transform .18s ease;
+  min-width: 102px;
+  min-height: 44px;
+  border-radius: 14px;
+  padding: 10px 14px;
+  border: 1px solid rgba(126,108,80,.18);
+  background: rgba(255,255,255,.38);
+  color: #574d41;
 }
 
-#itinerary .day-btn:hover { transform: translateY(-1px); }
 #itinerary .day-btn.active {
-  background: #342d26;
+  background: linear-gradient(180deg, #342d26, #453b34);
   border-color: #342d26;
-  color: #f8f4e8;
-}
-
-#itineraryBox {
-  display: grid;
-  gap: 14px;
-  min-width: 0;
+  box-shadow: 0 9px 18px rgba(52,45,38,.12);
 }
 
 #itineraryBox > .soft-card:first-child {
-  margin-top: 0;
-  padding: clamp(16px, 4vw, 24px);
+  background: linear-gradient(180deg, rgba(255,255,255,.68), rgba(249,246,236,.9));
   border-radius: 22px;
-  animation: itinerary-arrive .22s ease-out;
+  padding: clamp(18px, 4vw, 26px);
 }
 
-#itineraryBox > .soft-card:first-child > .section-head {
-  align-items: flex-start;
-  padding-bottom: 14px;
-  border-bottom: 1px solid rgba(126,108,80,.14);
-}
-
-#itineraryBox > .soft-card:first-child .section-head h2 {
-  margin-top: 4px;
-  font-size: clamp(1.25rem, 4vw, 1.65rem);
-  line-height: 1.35;
-}
-
-#itineraryBox > .soft-card:first-child .timeline {
-  gap: 0;
-  padding-top: 6px;
+#itineraryBox > .soft-card:first-child .section-head {
+  padding-bottom: 10px;
+  border-bottom: 1px dashed rgba(126,108,80,.18);
 }
 
 #itineraryBox .timeline-item {
-  margin-left: 7px;
-  padding: 10px 0 18px 18px;
-  border-left: 1px dashed rgba(142,120,91,.5);
+  margin-left: 8px;
+  padding: 12px 0 18px 18px;
 }
 
-#itineraryBox .timeline-item:last-child { padding-bottom: 4px; }
 #itineraryBox .timeline-item::before {
-  width: 10px;
-  height: 10px;
+  width: 12px;
+  height: 12px;
   left: -7px;
-  top: 16px;
-  border: 2px solid #f8f4e8;
-  background: #806344;
-  box-shadow: 0 0 0 1px rgba(128,100,68,.35);
+  top: 14px;
+  background: #b99866;
+  border-color: rgba(255,255,255,.9);
 }
 
-#itineraryBox .timeline-item > .row {
-  align-items: center;
-  margin-bottom: 7px;
-}
-
-#itineraryBox .timeline-item .row .row { gap: 5px; }
-#itineraryBox .timeline-item .row .small-btn {
-  min-width: 34px;
-  min-height: 32px;
-  padding: 5px 8px;
-  font-size: 11px;
-}
 #itineraryBox .timeline-item h3 {
-  margin: 0 0 5px;
-  font-size: 1rem;
-  font-weight: 600;
+  font-family: Georgia, "Noto Serif TC", serif;
+  font-weight: 500;
+  letter-spacing: .02em;
 }
+
 #itineraryBox .timeline-item > .muted {
-  font-size: .86rem;
+  color: #756a5d;
   line-height: 1.7;
 }
-#itineraryBox .maplink { margin-top: 9px; }
 
-/* The add form remains available but reads as a quiet tool below the day's plan. */
+#itineraryBox .maplink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  background: rgba(241,231,220,.72);
+}
+
 #itineraryBox > .soft-card:last-child {
-  margin-top: 0;
-  padding: 16px;
-  border: 1px dashed rgba(126,108,80,.28);
+  background: rgba(255,255,255,.34);
   border-radius: 18px;
   box-shadow: none;
-  background: rgba(255,255,255,.28);
-}
-#itineraryBox > .soft-card:last-child h3 {
-  margin-bottom: 4px;
-  font-size: .95rem;
 }
 
-@keyframes itinerary-arrive {
-  from { opacity: .65; transform: translateY(5px); }
-  to { opacity: 1; transform: translateY(0); }
+#itineraryBox > .soft-card:last-child h3 {
+  font-size: .95rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: #8a7a67;
+}
+
+.bottom-nav {
+  background: rgba(249,246,238,.92);
+  border-top: 1px solid rgba(126,108,80,.14);
+  box-shadow: 0 -8px 20px rgba(67,55,39,.04);
+  backdrop-filter: blur(12px);
+}
+
+.bottom-tab {
+  color: #7b6d60;
+}
+
+.bottom-tab.active {
+  background: rgba(228,214,190,.76);
+  color: #2f2824;
 }
 
 @media (max-width: 680px) {
-  #itinerary .card { padding: 14px; gap: 10px; }
-  #itinerary .day-row { margin-right: -6px; }
-  #itineraryBox > .soft-card:first-child .section-head { gap: 8px; }
-  #itineraryBox > .soft-card:first-child .section-head .chip { font-size: 10px; }
-  #itineraryBox .timeline-item > .row .row .small-btn { min-width: 30px; padding: 5px 6px; }
-  #itineraryBox > .soft-card:last-child .tool-row { align-items: stretch; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  #itinerary .day-btn { transition: none; }
-  #itineraryBox > .soft-card:first-child { animation: none; }
+  body { padding: 12px 12px 100px; }
+  .topbar { padding: 8px 2px 12px; }
+  .topbar h1 { font-size: 1.8rem; }
+  .countdown-btn { min-width: 66px; }
+  #itinerary .card { padding: 14px; }
+  #itinerary .day-row { margin-right: -2px; }
+  #itinerary .day-btn { min-width: 92px; }
 }
