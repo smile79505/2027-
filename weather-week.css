@@ -1,0 +1,130 @@
+.weather-week-root {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.weather-week-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 10px 12px;
+  border-radius: 16px;
+  background: rgba(255,255,255,.55);
+  border: 2px solid var(--line);
+}
+
+.weather-week-label {
+  font-size: .8rem;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.weather-city-select {
+  min-width: 150px;
+}
+
+.weather-week-status {
+  margin: 0;
+  font-size: .82rem;
+  color: var(--muted);
+  min-height: 1.2em;
+}
+
+.weather-week-status.is-error {
+  color: var(--danger);
+}
+
+.weather-week-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(110px, 1fr));
+  gap: 12px;
+}
+
+.weather-day-card {
+  background: linear-gradient(180deg, #fffaf4, #f3ecdf);
+  border: 2px solid var(--line);
+  border-radius: 18px;
+  box-shadow: var(--shadow-soft, 0 8px 18px rgba(45, 38, 34, .08));
+  padding: 12px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 180px;
+}
+
+.weather-day-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.weather-day-date {
+  font-size: .8rem;
+  color: var(--ink);
+}
+
+.weather-day-icon {
+  font-size: 1.4rem;
+}
+
+.weather-day-condition {
+  font-size: .8rem;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.weather-day-range {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  line-height: 1;
+}
+
+.weather-day-high {
+  font-size: 1.6rem;
+}
+
+.weather-day-low {
+  font-size: .9rem;
+  color: var(--muted);
+  padding-bottom: 3px;
+}
+
+.weather-day-rain {
+  font-size: .75rem;
+  color: var(--muted);
+  border-top: 1px dashed rgba(57, 47, 44, .35);
+  padding-top: 8px;
+}
+
+.weather-week-note,
+.weather-week-source {
+  margin: 0;
+  font-size: .72rem;
+  color: var(--muted);
+}
+
+.weather-week-source {
+  text-decoration: underline;
+}
+
+@media (max-width: 900px) {
+  .weather-week-grid {
+    grid-template-columns: repeat(3, minmax(120px, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .weather-week-grid {
+    grid-template-columns: repeat(2, minmax(120px, 1fr));
+  }
+
+  .weather-week-toolbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
