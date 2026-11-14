@@ -215,26 +215,21 @@
     }
   });
 
-  // Keep the decorative home date strip, current-day summary, and editable itinerary
-  // driven by the same persisted itinerary dates instead of separate hard-coded dates.
   function syncItineraryDateRibbon() {
     if (typeof state === 'undefined' || typeof currentDay === 'undefined') return;
-    const itinerary = state.itin || {};
-    const dayEntries = Object.entries(itinerary);
+    const dayEntries = Object.entries(state.itin || {});
     const ribbon = document.querySelector('.journey-days');
     const caption = document.querySelector('.journey-progress-caption');
     const progress = document.querySelector('.progress-track i');
     const todayTitle = document.querySelector('.today-copy h2');
     const todayDescription = document.querySelector('.today-copy p');
-    const homeSchedule = document.querySelector('.home-itinerary');
     if (!ribbon || !dayEntries.length) return;
 
     const weekdays = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
     ribbon.replaceChildren();
     dayEntries.forEach(([key, day], index) => {
       const match = String(day.date || '').match(/(\d{4})\/(\d{1,2})\/(\d{1,2})/);
-      const fallbackDate = new Date(2027, 0, 20 + index);
-      const date = match ? new Date(Number(match[1]), Number(match[2]) - 1, Number(match[3]), 12) : fallbackDate;
+      const date = match ? new Date(Number(match[1]), Number(match[2]) - 1, Number(match[3]), 12) : new Date(2027, 0, 20 + index);
       const button = document.createElement('button');
       button.type = 'button';
       button.className = `journey-day${Number(key) === Number(currentDay) ? ' active' : ''}`;
@@ -261,39 +256,104 @@
       todayTitle.textContent = match ? `Day ${selectedIndex + 1}　${Number(match[1])}月${Number(match[2])}日` : `Day ${selectedIndex + 1}`;
     }
     if (todayDescription) todayDescription.textContent = selectedDay.title || '';
-
-    if (homeSchedule) {
-      const sectionHead = homeSchedule.querySelector('.section-head');
-      homeSchedule.replaceChildren();
-      if (sectionHead) homeSchedule.appendChild(sectionHead);
-      const title = homeSchedule.querySelector('.home-section-title h2');
-      if (title) title.textContent = '今日行程';
-      const viewAll = homeSchedule.querySelector('.text-link');
-      if (viewAll) viewAll.dataset.gotoDay = selectedKey;
-      (selectedDay.items || []).forEach((item) => {
-        const row = document.createElement('button');
-        row.type = 'button';
-        row.className = 'home-stop';
-        row.dataset.gotoDay = selectedKey;
-        const time = document.createElement('time');
-        time.textContent = item.time || '—';
-        const details = document.createElement('span');
-        const name = document.createElement('strong');
-        name.textContent = item.title || '未命名行程';
-        const note = document.createElement('small');
-        note.textContent = item.desc || item.q || '';
-        details.append(name, note);
-        const arrow = document.createElement('b');
-        arrow.textContent = '›';
-        row.append(time, details, arrow);
-        homeSchedule.appendChild(row);
-      });
-    }
-
-    const activeButton = ribbon.querySelector('.journey-day.active');
-    activeButton?.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' });
+    ribbon.querySelector('.journey-day.active')?.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' });
   }
 
   document.addEventListener('click', () => window.setTimeout(syncItineraryDateRibbon, 0));
   syncItineraryDateRibbon();
+})();
+
+// Replace interface emoji with consistent Lucide icons, including icons in controls
+// and UI that is rendered dynamically after tab/date changes.
+(() => {
+  const ICONS = {
+    '📖': 'book-open', '🗓️': 'calendar-days', '🗓': 'calendar-days', '🌿': 'leaf', '🌱': 'sprout',
+    '✈️': 'plane', '✈': 'plane', '🎒': 'backpack', '🛟': 'life-buoy', '🧮': 'calculator',
+    '☀️': 'sun', '☀': 'sun', '🌤️': 'cloud-sun', '🌤': 'cloud-sun', '⛅': 'cloud-sun', '☁️': 'cloud', '☁': 'cloud',
+    '🌫️': 'cloud-fog', '🌫': 'cloud-fog', '🌦️': 'cloud-drizzle', '🌦': 'cloud-drizzle', '🌧️': 'cloud-rain', '🌧': 'cloud-rain',
+    '🌨️': 'cloud-snow', '🌨': 'cloud-snow', '❄️': 'snowflake', '❄': 'snowflake', '⛈️': 'cloud-lightning', '⛈': 'cloud-lightning',
+    '🌡️': 'thermometer', '🌡': 'thermometer', '💧': 'droplet', '🔄': 'refresh-cw', '🔄️': 'refresh-cw',
+    '⛩️': 'landmark', '⛩': 'landmark', '🍱': 'utensils', '🍡': 'utensils', '🏯': 'castle', '☃️': 'snowflake',
+    '🏨': 'hotel', '🍑': 'plane', '🛟': 'life-buoy', '💬': 'message-circle', '🏢': 'building-2', '🔊': 'volume-2',
+    '👥': 'users', '✍️': 'pencil', '✍': 'pencil', '🧾': 'receipt-text', '🤝': 'handshake', '🧳': 'luggage',
+    '🛡️': 'shield', '🛡': 'shield', '📍': 'map-pin', '📌': 'map-pin', '🗺️': 'map', '🗺': 'map',
+    '🏠': 'house', '⌂': 'house', '▦': 'calendar-days', '⌖': 'map-pinned', '▤': 'receipt', '◇': 'list-checks',
+    '☼': 'sun', '›': 'chevron-right', '‹': 'chevron-left', '↑': 'arrow-up', '↓': 'arrow-down',
+    '▶': 'play', '⏸': 'pause', '◀': 'chevron-left', '✕': 'x', '✖': 'x', '＋': 'plus', '✚': 'plus',
+    '🟢': 'circle-check', '🔴': 'circle-alert', '⚪': 'circle', '🟡': 'circle', '🟠': 'circle',
+    '🧤': 'hand', '🔑': 'key-round', '💳': 'credit-card', '📱': 'smartphone', '🔋': 'battery-charging',
+    '🧥': 'shirt', '🧦': 'sock', '🧴': 'spray-can', '💊': 'pill', '🧻': 'scroll-text', '🛂': 'badge-check',
+    '🚆': 'train-front', '🚉': 'train-front', '🚌': 'bus-front', '🚕': 'car-taxi-front', '🚶': 'person-standing',
+    '🏛️': 'landmark', '🏛': 'landmark', '🌸': 'flower-2', '🍜': 'soup', '🍽️': 'utensils', '🍽': 'utensils',
+    '☕': 'coffee', '🛍️': 'shopping-bag', '🛍': 'shopping-bag', '🌳': 'trees', '🌲': 'trees',
+    '🧭': 'compass', '🗻': 'mountain', '🏔️': 'mountain-snow', '🏔': 'mountain-snow', '🌙': 'moon',
+    '🕒': 'clock-3', '⏰': 'alarm-clock', '🕰️': 'clock', '🕰': 'clock', '🌍': 'globe-2', '🌏': 'globe-2'
+  };
+  const emojiPattern = /(?:\p{Extended_Pictographic}(?:\uFE0F|\u200D\p{Extended_Pictographic})*|⌂|▦|⌖|▤|◇|☼|›|‹|↑|↓|▶|⏸|◀|✕|✖|＋|✚)/gu;
+  let iconsReady = false;
+
+  function replaceIcons(root = document.body) {
+    if (!root || root.nodeType !== Node.ELEMENT_NODE && root.nodeType !== Node.DOCUMENT_FRAGMENT_NODE) return;
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+      acceptNode(node) {
+        if (!node.nodeValue || !emojiPattern.test(node.nodeValue)) {
+          emojiPattern.lastIndex = 0;
+          return NodeFilter.FILTER_REJECT;
+        }
+        emojiPattern.lastIndex = 0;
+        if (node.parentElement?.closest('script,style,svg,[data-lucide],.icon-ignore')) return NodeFilter.FILTER_REJECT;
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    });
+    const nodes = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+    nodes.forEach((textNode) => {
+      const text = textNode.nodeValue;
+      const fragment = document.createDocumentFragment();
+      let cursor = 0;
+      for (const match of text.matchAll(emojiPattern)) {
+        if (match.index > cursor) fragment.append(document.createTextNode(text.slice(cursor, match.index)));
+        const iconName = ICONS[match[0]];
+        if (iconName) {
+          const icon = document.createElement('i');
+          icon.setAttribute('data-lucide', iconName);
+          icon.className = 'ui-icon';
+          icon.setAttribute('aria-hidden', 'true');
+          fragment.appendChild(icon);
+        } else {
+          fragment.append(document.createTextNode(match[0]));
+        }
+        cursor = match.index + match[0].length;
+      }
+      if (cursor < text.length) fragment.append(document.createTextNode(text.slice(cursor)));
+      textNode.replaceWith(fragment);
+    });
+    if (iconsReady && window.lucide) window.lucide.createIcons({ attrs: { 'stroke-width': 1.8 } });
+  }
+
+  const iconScript = document.createElement('script');
+  iconScript.src = 'https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js';
+  iconScript.onload = () => {
+    iconsReady = true;
+    replaceIcons();
+    window.lucide.createIcons({ attrs: { 'stroke-width': 1.8 } });
+  };
+  document.head.appendChild(iconScript);
+
+  const observer = new MutationObserver((records) => {
+    records.forEach((record) => {
+      record.addedNodes.forEach((node) => {
+        if (node.nodeType === Node.TEXT_NODE) {
+          const wrapper = document.createElement('span');
+          wrapper.appendChild(node.cloneNode());
+          replaceIcons(wrapper);
+          node.replaceWith(...wrapper.childNodes);
+        } else if (node.nodeType === Node.ELEMENT_NODE) {
+          replaceIcons(node);
+        }
+      });
+    });
+  });
+  observer.observe(document.body, { childList: true, subtree: true });
+  replaceIcons();
 })();
